@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import db from './db'
+import "./App.css"
 
 function App() {
+  const[data,setData] = useState(db);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h2>{data.length} Birthdays Today</h2>
+      {data.map((x,y)=>{
+        return(
+          <div id='main' key={y}>
+          <div >
+          <img src={x.image} alt="images" style={{width:"150px",height:"150px"}} />
+          </div>
+          <div id='sub'>
+          <h3>{x.name}</h3>
+          <p>{x.date}</p>
+          </div>
+          </div>
+        )
+      })}
+      <button onClick={()=>setData([])}>ClearAll</button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
